@@ -49,6 +49,8 @@ This will show you a list of installed packages, including `pylibdmtx`, `picamer
 
 ### Example Script (`capture_and_decode.py`)
 Here is an example script that captures an image and decodes the DMC code:
+
+```bash
 #!/home/david/Documents/DMC_Code_Reader/bin/python3.11
 from __future__ import print_function
 
