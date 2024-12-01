@@ -49,49 +49,47 @@ This will show you a list of installed packages, including `pylibdmtx`, `picamer
 
 ### Example Script (`capture_and_decode.py`)
 Here is an example script that captures an image and decodes the DMC code:
+#!/home/david/Documents/DMC_Code_Reader/bin/python3.11
+from __future__ import print_function
 
-```python
-from picamera import PiCamera
-from time import sleep
+import argparse
+import sys
+
+import pylibdmtx
 from pylibdmtx.pylibdmtx import decode
-import cv2
 
-def capture_image(file_path):
-    camera = PiCamera()
-    camera.start_preview()
-    sleep(2)  # Give the camera some time to adjust
-    camera.capture(file_path)
-    camera.stop_preview()
-    camera.close()
-    print(f"Image captured and saved to {file_path}")
 
-def decode_dmc(file_path):
-    img = cv2.imread(file_path)
-    if img is None:
-        print("Failed to load image.")
-        return
+def main(args=None):
+    if args is None:
+        args = sys.argv[1:]
 
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    print("Converted image to grayscale.")
+    parser = argparse.ArgumentParser(
+        description='Reads datamatrix barcodes in images'
+    )
+    parser.add_argument('image', nargs='+')
+    parser.add_argument(
+        '-v', '--version', action='version',
+        version='%(prog)s ' + pylibdmtx.__version__
+    )
+    args = parser.parse_args(args)
 
-    decoded_objects = decode(gray)
-    if not decoded_objects:
-        print("No Data Matrix Code detected.")
-    else:
-        for obj in decoded_objects:
-            print(f"Decoded Data Matrix Code: {obj.data.decode('utf-8')}")
+    from PIL import Image
 
-if __name__ == "__main__":
-    image_path = "/home/david/Documents/dmc_test.jpg"
-    capture_image(image_path)
-    decode_dmc(image_path)
+    for image in args.image:
+        for barcode in decode(Image.open(image)):
+            print(barcode.data)
+
+
+if __name__ == '__main__':
+    main()
+
+
 ```
 
 ### Running the Script
 To run the script, use the following command:
 
 ```bash
-python capture_and_decode.py
+python read_datamatrix.py /path/to/your/image.jpg
 ```
 
-This will capture an image using the Raspberry Pi camera, save it to `/home/david/Documents/dmc_test.jpg`, and then decode any Data Matrix Codes in the image, printing the decoded data to the console.
