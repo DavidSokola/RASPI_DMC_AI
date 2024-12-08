@@ -1,8 +1,9 @@
-# RASPI_DMC_AI
+# RASPI_DMC_read routine
 
-Raspberry pi 5 + raspebery AI kit plus 26TOPS 
+library --pylibdmtx-- picamera 
+cteni DMC z vystrizeneho obrazku
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 To create a new virtual environment named `DMC_Code_Reader` and install the required libraries specified in your DMC_test.json
 
