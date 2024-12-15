@@ -1,0 +1,1 @@
+(Ai) david@david-Z270X:~/DMC/yolov5$ python val.py --weights /home/david/DMC/yolov5/runs/train/exp6/weights/best.pt --data /home/david/DMC/datasets/coco128/data.yaml --task test
