@@ -1,0 +1,141 @@
+o convert your TorchScript model (best.torchscript) to ONNX and then use it on the Hailo 8 accelerator on your Raspberry Pi, follow these steps:
+1. Convert TorchScript to ONNX
+
+You will need PyTorch and its ONNX export utilities.
+Steps:
+
+    Install dependencies (if not already installed):
+
+pip install torch torchvision onnx
+
+Export to ONNX: Use the following Python script:
+
+import torch
+
+# Load TorchScript model
+torchscript_model = torch.jit.load('/home/david/DMC/yolov5/best.torchscript')
+torchscript_model.eval()
+
+# Dummy input tensor matching your model's input size
+dummy_input = torch.randn(1, 3, 640, 640)  # Adjust size (3, 640, 640) if needed
+
+# ONNX export path
+onnx_path = '/home/david/DMC/yolov5/best.onnx'
+
+# Export to ONNX
+torch.onnx.export(
+    torchscript_model,          # TorchScript model
+    dummy_input,                # Input tensor
+    onnx_path,                  # Path to save ONNX model
+    input_names=['input'],      # Input name
+    output_names=['output'],    # Output name
+    opset_version=11            # ONNX opset version (11 is widely supported)
+)
+
+print(f"ONNX model exported to {onnx_path}")
+
+Run the script:
+
+    python export_torchscript_to_onnx.py
+
+2. Prepare the ONNX Model for Hailo 8
+
+To deploy an ONNX model on Hailo 8, use Hailo Tappas Toolkit and Hailo software tools.
+Steps:
+
+    Install Hailo SDK: Download the Hailo SDK from the Hailo website and install it on your Raspberry Pi. You will need:
+        Hailo's tappas (toolchain for preprocessing and model conversion)
+        Hailo RT (runtime) for deployment.
+
+    Quantize the ONNX Model: Use the Hailo Model Zoo tools to quantize the ONNX model for optimal performance on Hailo 8.
+
+    Example:
+
+hailomz compile \
+    --model /home/david/DMC/yolov5/best.onnx \
+    --output /home/david/DMC/yolov5/best_hailo.hef \
+    --input_shape 1,3,640,640
+
+Run the Model on Hailo 8: Once you generate the .hef file (Hailo Executable Format), deploy it on your Hailo 8.
+
+Example test command:
+
+    hailortcli run --hef /home/david/DMC/yolov5/best_hailo.hef --input_image input.jpg --output output.jpg
+
+Summary of Steps:
+
+    Export best.torchscript to ONNX.
+    Quantize and compile the ONNX model for Hailo 8 using Hailo tools.
+    Run the model on your Hailo accelerator using the .hef file.
+
+Let me know if you encounter any specific issues during the steps! 🚀o convert your TorchScript model (best.torchscript) to ONNX and then use it on the Hailo 8 accelerator on your Raspberry Pi, follow these steps:
+1. Convert TorchScript to ONNX
+
+You will need PyTorch and its ONNX export utilities.
+Steps:
+
+    Install dependencies (if not already installed):
+
+pip install torch torchvision onnx
+
+Export to ONNX: Use the following Python script:
+
+import torch
+
+# Load TorchScript model
+torchscript_model = torch.jit.load('/home/david/DMC/yolov5/best.torchscript')
+torchscript_model.eval()
+
+# Dummy input tensor matching your model's input size
+dummy_input = torch.randn(1, 3, 640, 640)  # Adjust size (3, 640, 640) if needed
+
+# ONNX export path
+onnx_path = '/home/david/DMC/yolov5/best.onnx'
+
+# Export to ONNX
+torch.onnx.export(
+    torchscript_model,          # TorchScript model
+    dummy_input,                # Input tensor
+    onnx_path,                  # Path to save ONNX model
+    input_names=['input'],      # Input name
+    output_names=['output'],    # Output name
+    opset_version=11            # ONNX opset version (11 is widely supported)
+)
+
+print(f"ONNX model exported to {onnx_path}")
+
+Run the script:
+
+    python export_torchscript_to_onnx.py
+
+2. Prepare the ONNX Model for Hailo 8
+
+To deploy an ONNX model on Hailo 8, use Hailo Tappas Toolkit and Hailo software tools.
+Steps:
+
+    Install Hailo SDK: Download the Hailo SDK from the Hailo website and install it on your Raspberry Pi. You will need:
+        Hailo's tappas (toolchain for preprocessing and model conversion)
+        Hailo RT (runtime) for deployment.
+
+    Quantize the ONNX Model: Use the Hailo Model Zoo tools to quantize the ONNX model for optimal performance on Hailo 8.
+
+    Example:
+
+hailomz compile \
+    --model /home/david/DMC/yolov5/best.onnx \
+    --output /home/david/DMC/yolov5/best_hailo.hef \
+    --input_shape 1,3,640,640
+
+Run the Model on Hailo 8: Once you generate the .hef file (Hailo Executable Format), deploy it on your Hailo 8.
+
+Example test command:
+
+    hailortcli run --hef /home/david/DMC/yolov5/best_hailo.hef --input_image input.jpg --output output.jpg
+
+Summary of Steps:
+
+    Export best.torchscript to ONNX.
+    Quantize and compile the ONNX model for Hailo 8 using Hailo tools.
+    Run the model on your Hailo accelerator using the .hef file.
+
+Let me know if you encounter any specific issues during the steps! 🚀
