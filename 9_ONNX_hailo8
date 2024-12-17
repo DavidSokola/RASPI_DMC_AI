@@ -1,0 +1,31 @@
+Prepare the ONNX Model for Hailo 8
+
+To deploy an ONNX model on Hailo 8, use Hailo Tappas Toolkit and Hailo software tools.
+Steps:
+
+    Install Hailo SDK: Download the Hailo SDK from the Hailo website and install it on your Raspberry Pi. You will need:
+        Hailo's tappas (toolchain for preprocessing and model conversion)
+        Hailo RT (runtime) for deployment.
+
+    Quantize the ONNX Model: Use the Hailo Model Zoo tools to quantize the ONNX model for optimal performance on Hailo 8.
+
+    Example:
+
+hailomz compile \
+    --model /home/david/DMC/yolov5/best.onnx \
+    --output /home/david/DMC/yolov5/best_hailo.hef \
+    --input_shape 1,3,640,640
+
+Run the Model on Hailo 8: Once you generate the .hef file (Hailo Executable Format), deploy it on your Hailo 8.
+
+Example test command:
+
+    hailortcli run --hef /home/david/DMC/yolov5/best_hailo.hef --input_image input.jpg --output output.jpg
+
+Summary of Steps:
+
+    Export best.torchscript to ONNX.
+    Quantize and compile the ONNX model for Hailo 8 using Hailo tools.
+    Run the model on your Hailo accelerator using the .hef file.
+
+Let me know if you encounter any specific issues during the steps! 🚀
