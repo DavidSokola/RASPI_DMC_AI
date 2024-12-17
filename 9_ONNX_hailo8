@@ -29,3 +29,32 @@ Summary of Steps:
     Run the model on your Hailo accelerator using the .hef file.
 
 Let me know if you encounter any specific issues during the steps! 🚀
+
+
+--------------------------------------------------------------------------------------------------------------
+david@david-Z270X:~/Downloads/hailo_ai_sw_suite_2024-10_docker$ sudo systemctl status docker
+[sudo] password for david: 
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2024-12-17 18:47:22 CET; 25min left
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 1965 (dockerd)
+      Tasks: 18
+     Memory: 4.7G (peak: 5.2G)
+        CPU: 3min 35.405s
+     CGroup: /system.slice/docker.service
+             ├─1965 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+             └─8917 /usr/bin/unpigz -d -c
+
+Dec 17 18:47:22 david-Z270X dockerd[1965]: time="2024-12-17T18:47:22.511719921+01:00" level=warning msg="WARNING: bridge-nf-call-iptables is disabled"
+Dec 17 18:47:22 david-Z270X dockerd[1965]: time="2024-12-17T18:47:22.511744303+01:00" level=warning msg="WARNING: bridge-nf-call-ip6tables is disabled"
+Dec 17 18:47:22 david-Z270X dockerd[1965]: time="2024-12-17T18:47:22.511769219+01:00" level=info msg="Docker daemon" commit=92a8393 containerd-snapshotter=false storage-driver=overlay>
+Dec 17 18:47:22 david-Z270X dockerd[1965]: time="2024-12-17T18:47:22.511924061+01:00" level=info msg="Daemon has completed initialization"
+Dec 17 18:47:22 david-Z270X dockerd[1965]: time="2024-12-17T18:47:22.537049798+01:00" level=info msg="API listen on /run/docker.sock"
+Dec 17 18:47:22 david-Z270X systemd[1]: Started docker.service - Docker Application Container Engine.
+Dec 17 18:17:34 david-Z270X dockerd[1965]: time="2024-12-17T18:17:34.930938732+01:00" level=error msg="Not continuing with pull after error: errors:\ndenied: requested access to the r>
+Dec 17 18:17:34 david-Z270X dockerd[1965]: time="2024-12-17T18:17:34.930969439+01:00" level=info msg="Ignoring extra error returned from registry" error="unauthorized: authentication >
+Dec 17 18:18:47 david-Z270X dockerd[1965]: time="2024-12-17T18:18:47.090016143+01:00" level=error msg="Not continuing with pull after error: errors:\ndenied: requested access to the r>
+Dec 17 18:18:47 david-Z270X dockerd[1965]: time="2024-12-17T18:18:47.090058524+01:00" level=info msg="Ignoring extra error returned from registry" error="unauthorized: authentication >
+lines 1-23/23 (END)
