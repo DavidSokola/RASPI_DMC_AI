@@ -1,0 +1,53 @@
+To activate and start Docker on your system, follow these steps:
+
+1. Start Docker Service
+If Docker is not already running, you can start the Docker service using systemctl:
+
+bash
+Copy code
+sudo systemctl start docker
+This command will start the Docker service.
+
+2. Enable Docker to Start on Boot
+If you want Docker to automatically start when your system boots, run:
+
+bash
+Copy code
+sudo systemctl enable docker
+This ensures that Docker starts up every time you boot your machine.
+
+3. Verify Docker is Running
+After starting Docker, you can check if it's running correctly with the following command:
+
+bash
+Copy code
+sudo systemctl status docker
+If Docker is active and running, you will see output like this:
+
+yaml
+Copy code
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since ...
+       Docs: https://docs.docker.com
+   Main PID: 12345 (dockerd)
+      Tasks: 14
+     Memory: 34.4M
+     CGroup: /system.slice/docker.service
+             └─12345 /usr/bin/dockerd --host=fd://
+4. Test Docker Activation
+You can also test Docker by running the following command to see if it's working:
+
+bash
+Copy code
+docker --version
+This should display the installed Docker version.
+
+To confirm Docker is properly running and activated, you can try running a simple Docker container:
+
+bash
+Copy code
+docker run hello-world
+This command will pull the "hello-world" Docker image from Docker Hub and run a container. If everything is set up correctly, you will see a message that confirms Docker is working.
+
+That's it! Docker is now activated and ready to use on your Ubuntu system.
