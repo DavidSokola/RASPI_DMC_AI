@@ -16,4 +16,10 @@ nvidia-docker2 (installation instructions)
 cd hailo_model_zoo/training/yolov8
 docker build --build-arg timezone=`cat /etc/timezone` -t yolov8:v0 .
 
-
+----------------------------------------------------------------------
+docker run -it --name hailo_ai_sw_suite_2024-10_container \
+    --runtime nvidia \
+    --privileged \
+    --net=host \
+    hailo_ai_sw_suite_2024-10:1 \
+    bash
