@@ -1,1 +1,19 @@
+    Install docker
+https://docs.docker.com/engine/release-notes/20.10/
+
+-----------------------------------------------------------------------
 https://github.com/hailo-ai/hailo_model_zoo/blob/master/training/yolov8/README.rst
+
+  YOLOv8 Retraining
+      To learn more about yolov8 look here
+      Prerequisites
+docker (installation instructions)
+nvidia-docker2 (installation instructions)
+    NOTE: In case you are using the Hailo Software Suite docker, make sure to run all of the following instructions outside of that docker.
+
+  Environment Preparations
+    Build the docker image:
+cd hailo_model_zoo/training/yolov8
+docker build --build-arg timezone=`cat /etc/timezone` -t yolov8:v0 .
+
+
