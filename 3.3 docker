@@ -6,26 +6,33 @@ https://github.com/hailo-ai/hailo_model_zoo/blob/master/training/yolov8/README.r
 
   YOLOv8 Retraining
       To learn more about yolov8 look here
-      Prerequisites
+
+-----------------------------------------------------------------------
+
+Prerequisites
+
 docker (installation instructions)
 nvidia-docker2 (installation instructions)
+
     NOTE: In case you are using the Hailo Software Suite docker, make sure to run all of the following instructions outside of that docker.
 
+----------------------------------------------------------------------
+
   Environment Preparations
+
     Build the docker image:
 cd hailo_model_zoo/training/yolov8
 docker build --build-arg timezone=`cat /etc/timezone` -t yolov8:v0 .
 
-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+sudo docker run --rm --gpus all nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04 nvidia-smi
+
+-----------------------------------------------------------------------
 docker run -it --name hailo_ai_sw_suite_2024-10_container \
     --runtime nvidia \
     --privileged \
     --net=host \
     hailo_ai_sw_suite_2024-10:1 \
     bash
-
-
------------------------------------------------------------------------
-
-sudo docker run --rm --gpus all nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04 nvidia-smi
 
