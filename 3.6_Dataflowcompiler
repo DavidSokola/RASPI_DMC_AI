@@ -1,4 +1,22 @@
-https://community.hailo.ai/t/how-to-install-dataflow-compiler/1276/13 
+1. Verify Permissions on /workspace/DMC
+Check the permissions of the /workspace/DMC directory:
 
-1] install docker for ubuntu
-https://docs.docker.com/engine/install/ubuntu/
+bash
+Copy code
+ls -ld /workspace/DMC
+If the directory isn’t writable, proceed to fix the permissions.
+
+2. Update Permissions
+To make /workspace/DMC writable, use the following command:
+
+bash
+Copy code
+sudo chmod -R 777 /workspace/DMC
+This grants full read, write, and execute permissions to all users for the directory.
+
+3. Download the Model Again
+Retry downloading the model after fixing permissions:
+
+bash
+Copy code
+wget -O /workspace/DMC/yolov5s.pt https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt
