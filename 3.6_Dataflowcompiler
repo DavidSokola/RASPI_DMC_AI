@@ -20,3 +20,116 @@ Retry downloading the model after fixing permissions:
 bash
 Copy code
 wget -O /workspace/DMC/yolov5s.pt https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt
+
+
+==========================================================================================================================================================================================================
+/home/david/Ai/DMC/hailo_model_zoo/training/yolov5
+==========================================================================================================================================================================================================
+
+Yes, you can create a different Docker container based on the provided Dockerfile. Below is a step-by-step guide to build and run a new Docker container from the given Dockerfile:
+
+11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+1. Save the Dockerfile
+Ensure that the Dockerfile is saved in the yolov5 directory at /home/david/Ai/DMC/hailo_model_zoo/training/yolov5.
+
+Verify the path:
+
+bash
+Copy code
+ls /home/david/Ai/DMC/hailo_model_zoo/training/yolov5/Dockerfile
+
+2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+2. Build the Docker Image
+Navigate to the yolov5 directory:
+
+bash
+Copy code
+cd /home/david/Ai/DMC/hailo_model_zoo/training/yolov5
+Build the Docker image:
+
+bash
+Copy code
+docker build -t yolov5-custom:latest .
+-t yolov5-custom:latest: Tags the image as yolov5-custom with the latest tag.
+The . specifies the current directory, which contains the Dockerfile.
+
+==========================================================================================================================================================================================================
+[+] Building 217.6s (4/14)                                                                                                                                                                  docker:default
+ => [ 1/10] FROM docker.io/pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime@sha256:db6086be92f439b918c96dc002f4cf40239e247f0b1b6c32e3fb36de70032bf9                                                    209.2s
+ => => sha256:e80c964ece6a3edf0db1cfc72ae0e6f0699fb776bbfcc92b708fbb945b0b9547 162B / 162B                                                                                                            0.8s
+ => => sha256:db6086be92f439b918c96dc002f4cf40239e247f0b1b6c32e3fb36de70032bf9 1.58kB / 1.58kB                                                                                                        0.0s
+ => => sha256:331a461a25f96bc0bc51ee3ee9613761fa665cbd019ae5b134f10a6fb362f495 4.33kB / 4.33kB                                                                                                        0.0s
+ => => sha256:f22ccc0b8772d8e1bcb40f137b373686bc27427a70c0e41dd22b38016e09e7e0 26.71MB / 26.71MB                                                                                                     23.0s
+ => => sha256:3cf8fb62ba5ffb221a2edb2208741346eb4d2d99a174138e4afbb69ce1fd9966 850B / 850B                                                                                                            0.7s
+ => => sha256:20dbc2116049dfb20f57717b4fd244af84cb32f70edb462990724596569804f8 15.29MB / 15.29MB                                                                                                     21.4s
+ => => sha256:7178fad0656ff14719b25a49cc3c7f66fa812febac742093e7e9c4bb1058f60b 470.81MB / 2.46GB                                                                                                    209.2s
+ => => sha256:8573fc1d93aab01b7f0f42ceb5b0ddccab2b487836cbef44164b53761a1dcc68 132B / 132B                                                                                                           21.7s
+ => => extracting sha256:f22ccc0b8772d8e1bcb40f137b373686bc27427a70c0e41dd22b38016e09e7e0                                                                                                             0.7s
+ => => extracting sha256:3cf8fb62ba5ffb221a2edb2208741346eb4d2d99a174138e4afbb69ce1fd9966                                                                                                             0.0s 
+ => => extracting sha256:e80c964ece6a3edf0db1cfc72ae0e6f0699fb776bbfcc92b708fbb945b0b9547                                                                                                             0.0s 
+ => => extracting sha256:20dbc2116049dfb20f57717b4fd244af84cb32f70edb462990724596569804f8   
+
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+
+
+
+33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+3. Verify the Docker Image
+After the image is built, check if it exists:
+
+bash
+Copy code
+docker images
+You should see an image named yolov5-custom in the output.
+
+
+444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+4. Run the Docker Container
+Create and run a container from the newly built image:
+
+bash
+Copy code
+docker run --rm -it --gpus all \
+    -v /home/david/Ai/DMC:/workspace/DMC \
+    -v /home/david/Ai/DMC/hailo_model_zoo:/workspace/hailo_model_zoo \
+    --name yolov5-custom-container \
+    yolov5-custom:latest bash
+--rm: Automatically removes the container when it exits.
+-it: Interactive mode with a terminal.
+--gpus all: Enables GPU support.
+-v: Mounts your dataset and model directories into the container.
+--name: Names the container yolov5-custom-container.
+
+5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5. Verify the Setup in the Container
+Inside the container, check the following:
+
+Ensure the YOLOv5 files were cloned correctly:
+
+bash
+Copy code
+ls /workspace/yolov5
+You should see the YOLOv5 repository and pretrained weights (yolov5s.pt, etc.).
+
+Verify mounted directories:
+
+bash
+Copy code
+ls /workspace/DMC
+ls /workspace/hailo_model_zoo
+6. Train YOLOv5
+Start training YOLOv5 with your dataset:
+
+bash
+Copy code
+python train.py --img 640 --batch 16 --epochs 50 --data /workspace/DMC/data.yaml --weights yolov5s.pt
+7. Save and Test Outputs
+After training:
+
+The trained weights (e.g., best.pt) will be saved in the container under:
+bash
+Copy code
+/workspace/yolov5/runs/train/exp/weights/best.pt
+These outputs are persistent because /workspace/DMC is mounted to your host machine at /home/david/Ai/DMC.
+
