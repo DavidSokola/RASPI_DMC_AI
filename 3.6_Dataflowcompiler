@@ -94,11 +94,16 @@ Create and run a container from the newly built image:
 
 bash
 Copy code
+
+
 docker run --rm -it --gpus all \
     -v /home/david/Ai/DMC:/workspace/DMC \
     -v /home/david/Ai/DMC/hailo_model_zoo:/workspace/hailo_model_zoo \
     --name yolov5-custom-container \
     yolov5-custom:latest bash
+
+
+
 --rm: Automatically removes the container when it exits.
 -it: Interactive mode with a terminal.
 --gpus all: Enables GPU support.
