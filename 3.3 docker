@@ -36,3 +36,38 @@ docker run -it --name hailo_ai_sw_suite_2024-10_container \
     hailo_ai_sw_suite_2024-10:1 \
     bash
 
+==================================================================================
+----------------------------------------------------------------------
+docker run --rm -it --gpus all \
+    -v /home/david/Ai/DMC:/workspace/DMC \
+    -v /home/david/Ai/hailo_model_zoo:/workspace/hailo_model_zoo \
+    --name hailo_ai_sw_suite_2024-10_container \
+    hailo_ai_sw_suite_2024-10:1 bash
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.8.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+
+Welcome to Hailo AI Software Suite Container
+To list available commands, please type:
+
+----------------------------------------------------
+
+HailoRT:                hailortcli -h
+Dataflow Compiler:      hailo -h
+Hailo Model Zoo:        hailomz -h
+TAPPAS:                 hailo_run_app -h
+
+----------------------------------------------------
