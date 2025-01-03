@@ -1,0 +1,114 @@
+david@david-Z270X:~/Ai/hailo_ai_sw_suite_2024-10_docker$ ./hailo_ai_sw_suite_docker_run.sh
+
+
+Starting new container
+Running Hailo AI SW suite Docker image with the folowing Docker command:
+docker run --privileged --net=host -e DISPLAY=:0 -e XDG_RUNTIME_DIR=/run/user/1000 --device=/dev/dri:/dev/dri --ipc=host --group-add 44 -v /dev:/dev -v /lib/firmware:/lib/firmware -v /lib/modules:/lib/modules -v /lib/udev/rules.d:/lib/udev/rules.d -v /usr/src:/usr/src -v /tmp/hailo_docker.xauth:/home/hailo/.Xauthority -v /tmp/.X11-unix/:/tmp/.X11-unix/ --name hailo_ai_sw_suite_2024-10_container -v /var/run/docker.sock:/var/run/docker.sock -v /etc/machine-id:/etc/machine-id:ro -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket -v /home/david/Ai/hailo_ai_sw_suite_2024-10_docker/shared_with_docker/:/local/shared_with_docker:rw -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro -v /var/lib/dkms:/var/lib/dkms --gpus all -ti hailo_ai_sw_suite_2024-10:1
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.8.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+
+
+Welcome to Hailo AI Software Suite Container
+To list available commands, please type:
+
+----------------------------------------------------
+
+HailoRT:                hailortcli -h
+Dataflow Compiler:      hailo -h
+Hailo Model Zoo:        hailomz -h
+TAPPAS:                 hailo_run_app -h
+
+----------------------------------------------------
+
+
+bash: /local/workspace/tappas/scripts/bash_completion.d/python-argcomplete: No such file or directory
+(hailo_virtualenv) hailo@david-Z270X:/local/workspace$ hailo -h
+[info] First time Hailo Dataflow Compiler is being used. Checking system requirements... (this might take a few seconds)
+[Warning] It is recommended to have 32 GB of RAM, while this system has only 19 GB.
+[Warning] CUDNN version should be 8.9 or higher, found ..
+Component                                Requirement                    Found                               
+==========  ==========       ==========  ==========                                                         
+OS                                       Ubuntu               Ubuntu                                        Required
+Release     20.04                        22.04                                       Required               
+Package     python3-tk                   V                    Required                                      
+Package     graphviz                     V                    Required                                      
+Package     libgraphviz-dev              V                    Required                                      
+Package     python3.10-dev               V                    Required                                      
+RAM(GB)     16                           19                                          Required               
+RAM(GB)     32                           19                                          Recommended            
+CPU-Arch                                              x86_64  x86_64                              Required  
+CPU-flag                                              avx     V                      Required               
+GPU-Driver                                            525     560       Recommended                         
+CUDA                                                  11.8    11.8                   Recommended            
+CUDNN                                                 8.9     .         Recommended                         
+Var:CC                       unset                    unset             Required                            
+Var:CXX                      unset                    unset             Required                            
+Var:LD                       unset                    unset             Required                            
+Var:AS                       unset                    unset             Required                            
+Var:AR                       unset                    unset             Required                            
+Var:LN                       unset                    unset             Required                            
+Var:DUMP                     unset                    unset             Required                            
+Var:CPY                      unset                    unset             Required                            
+[info] Current Time: 12:28:52, 01/03/25
+[info] CPU: Architecture: x86_64, Model: Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz, Number Of Cores: 8, Utilization: 0.5%
+[info] Memory: Total: 15GB, Available: 8GB
+[info] System info: OS: Linux, Kernel: 6.8.0-51-generic
+[info] Hailo DFC Version: 3.29.0
+[info] HailoRT Version: 4.19.0
+[info] PCIe: No Hailo PCIe device was found
+[info] Running `hailo -h`
+usage: hailo [-h] [--version]
+             {fw-update,ssb-update,fw-config,udp-rate-limiter,fw-control,fw-logger,scan,sensor-config,run,benchmark,monitor,parse-hef,measure-power,tutorial,analyze-noise,compiler,params-csv,parser,profiler,optimize,tb,visualizer,har,join,har-onnx-rt,runtime-profiler,dfc-studio,help}
+             ...
+
+Hailo Command Line Utility
+
+positional arguments:
+  {fw-update,ssb-update,fw-config,udp-rate-limiter,fw-control,fw-logger,scan,sensor-config,run,benchmark,monitor,parse-hef,measure-power,tutorial,analyze-noise,compiler,params-csv,parser,profiler,optimize,tb,visualizer,har,join,har-onnx-rt,runtime-profiler,dfc-studio,help}
+                        Hailo utilities aimed to help with everything you need
+    fw-update           Firmware update tool
+    ssb-update          Second stage boot update tool
+    fw-config           Firmware configuration tool
+    udp-rate-limiter    Limit the UDP rate
+    fw-control          Useful firmware control operations
+    fw-logger           Download fw logs to a file
+    scan                Scans for devices (Ethernet or PCIE)
+    sensor-config       Sensor configuration tool
+    run                 Run a compiled network
+    benchmark           Measure basic performance on compiled network
+    monitor             Monitor of networks - Presents information about the running networks. To enable monitor, set in the application process the environment variable 'HAILO_MONITOR' to
+                        1.
+    parse-hef           Parse HEF to get information about its components
+    measure-power       Measures power consumption
+    tutorial            Runs the tutorials in jupyter notebook
+    analyze-noise       Analyze network quantization noise
+    compiler            Compile Hailo model to HEF binary files
+    params-csv          Convert translated params to csv
+    parser              Translate network to Hailo network
+    profiler            Hailo models Profiler
+    optimize            Optimize model
+    tb                  Create Tensorboard summary for Tensorflow model
+    visualizer          HAR visualization tool
+    har                 Query and extract information from Hailo Archive file
+    join                Join two Hailo models to a single model
+    har-onnx-rt         Generates ONNX-Runtime model including pre/post processing
+    runtime-profiler    Hailo Runtime Profiler
+    dfc-studio          Start DFC Studio
+    help                show the list of commands
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
