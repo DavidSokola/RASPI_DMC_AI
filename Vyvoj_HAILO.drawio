@@ -203,9 +203,6 @@
         <mxCell id="tR9Q4W5SKawaML-Msuly-55" value="Hailo data flow compiler" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;rotation=-180;fillColor=#d5e8d4;strokeColor=#67AB9F;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;startSize=23;" parent="1" vertex="1">
           <mxGeometry x="-2336" y="1203" width="909" height="291.14" as="geometry" />
         </mxCell>
-        <mxCell id="i0K-aZeLS_sHcBUzNNbL-214" value="OPTIMIZE" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="tR9Q4W5SKawaML-Msuly-55">
-          <mxGeometry x="695" y="110.94000000000005" width="60" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="i0K-aZeLS_sHcBUzNNbL-278" value="OPTIMIZE" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="tR9Q4W5SKawaML-Msuly-55">
           <mxGeometry x="813" y="208.49" width="60" height="30" as="geometry" />
         </mxCell>
